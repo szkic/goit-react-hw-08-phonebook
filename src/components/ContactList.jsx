@@ -43,9 +43,9 @@ const sortedRowInformation = (rowArray, comparator) => {
 
 export const ContactList = () => {
   const [orderDirection, setOrderDirection] = useState('asc');
-  const [valueToOrderedBy, setValueToOrderedBy] = useState('name');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const valueToOrderedBy = 'name';
 
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ export const ContactList = () => {
             <TableCell sx={{ fontWeight: 900 }} key="name">
               <TableSortLabel
                 active={valueToOrderedBy === 'name'}
-                direction={valueToOrderedBy === 'name' ? orderDirection : 'asc'}
+                direction={'name' ? orderDirection : 'asc'}
                 onClick={createSortHandler('name')}
               >
                 Name
