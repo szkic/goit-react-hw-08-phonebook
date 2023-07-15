@@ -22,20 +22,16 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-
-      console.log(state.isLoggedIn);
     },
     [logout.fulfilled](state) {
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
-      console.log(state.user, state.token, state.isLoggedIn);
     },
     [refreshUser.pending](state) {
       state.isRefreshing = true;
     },
     [refreshUser.fulfilled](state, action) {
-      console.log(action.payload);
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshing = false;

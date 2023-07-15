@@ -15,8 +15,6 @@ export const RegisterForm = () => {
       password: form.elements.password.value,
     };
 
-    console.log(registerElements);
-
     dispatch(register(registerElements));
   };
 

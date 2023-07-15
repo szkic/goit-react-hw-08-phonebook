@@ -14,8 +14,6 @@ export const LoginForm = () => {
       password: form.elements.password.value,
     };
 
-    console.log(loginElements);
-
     dispatch(login(loginElements));
   };
   return (

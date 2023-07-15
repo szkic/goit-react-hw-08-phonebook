@@ -10,7 +10,7 @@ export const Contact = ({ contact }) => {
 
   return (
     <div>
-      {contact.name}: {contact.phone}
+      {contact.name}: {contact.number}
       <button
         type="submit"
         value={contact.id}

@@ -13,11 +13,11 @@ export const ContactForm = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.elements.name.value;
-    const phone = form.elements.phone.value;
+    const number = form.elements.number.value;
 
     const contact = {
       name,
-      phone,
+      number,
     };
 
     if (stateContactsNames.includes(name)) {
@@ -48,7 +48,7 @@ export const ContactForm = () => {
           Number
           <input
             type="tel"
-            name="phone"
+            name="number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             className={css.input}
