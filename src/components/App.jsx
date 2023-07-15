@@ -10,47 +10,50 @@ import { Phonebook } from 'pages/Phonebook';
 import { PrivateRoute } from './PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { fetchContacts } from 'redux/contacts/operations';
+import { useAuth } from 'hooks/useAuth';
 
 // const HomePage = lazy(() => import('../pages/Home'));
 // const RegisterPage = lazy(() => import('../pages/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (isLoggedIn) dispatch(fetchContacts());
+  }, [dispatch, isLoggedIn]);
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '20px auto' }}>
-      <h1 className="text-3xl font-bold underline bg-red-500">Tailwind test</h1>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                redirectTo="/contacts"
-                component={<Register />}
-              />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute redirectTo="/login" component={<Phonebook />} />
-            }
-          />
-        </Route>
-      </Routes>
+    <div className="flex flex-col items-center pt-4">
+      <div className="w-4/6">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<Register />}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+              }
+            />
+          </Route>
+        </Routes>
+      </div>
     </div>
   );
 };

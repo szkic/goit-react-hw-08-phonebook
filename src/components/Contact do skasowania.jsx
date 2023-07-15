@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import css from './Contact.module.css';
 import { deleteContact } from 'redux/contacts/operations';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -9,16 +10,20 @@ export const Contact = ({ contact }) => {
   const handleDelete = () => dispatch(deleteContact(contact.id));
 
   return (
-    <div>
+    <div className="flex items-center">
       {contact.name}: {contact.number}
-      <button
-        type="submit"
-        value={contact.id}
-        onClick={handleDelete}
-        className={css.delBtn}
-      >
-        Delete
-      </button>
+      <div className="ml-6">
+        <Button
+          type="submit"
+          variant="outlined"
+          size="small"
+          startIcon={<DeleteIcon />}
+          value={contact.id}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,12 @@
 import { Button, TextField } from '@mui/material';
-import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operations';
+
+const styles = {
+  containerDiv: ['flex', 'justify-center', 'pt-32'].join(' '),
+  loginForm: ['flex', 'flex-col'].join(' '),
+  label: 'mb-5',
+};
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -17,9 +22,9 @@ export const LoginForm = () => {
     dispatch(login(loginElements));
   };
   return (
-    <div className={css.loginContainer}>
-      <form className={css.loginForm} onSubmit={handleSubmit}>
-        <label className={css.label}>
+    <div className={styles.containerDiv}>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <label className={styles.label}>
           {/* Email */}
           <TextField
             id="login-email-input"
@@ -29,7 +34,7 @@ export const LoginForm = () => {
             name="email"
           />
         </label>
-        <label className={css.label}>
+        <label className={styles.label}>
           {/* Password */}
           <TextField
             id="login-password-input"
@@ -39,7 +44,7 @@ export const LoginForm = () => {
             name="password"
           />
         </label>
-        <Button type="submit" variant="contained" className={css.button}>
+        <Button type="submit" variant="contained">
           Log In
         </Button>
       </form>

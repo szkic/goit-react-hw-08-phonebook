@@ -1,7 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './ContactForm.module.css';
 import { selectContacts } from 'redux/contacts/selectors';
 import { addContact } from 'redux/contacts/operations';
+import { Button, TextField } from '@mui/material';
+
+const styles = {
+  form: ['flex', 'flex-col', 'items-start', 'max-w-sm'].join(' '),
+  label: ['flex', 'flex-col', 'mb-5'].join(' '),
+};
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -32,32 +37,32 @@ export const ContactForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={css.form}>
-        <label className={css.label}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className={styles.label}>
           Name
-          <input
+          <TextField
             type="text"
+            size="small"
             name="name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            className={css.input}
           />
         </label>
 
-        <label className={css.label}>
+        <label className={styles.label}>
           Number
-          <input
+          <TextField
             type="tel"
+            size="small"
             name="number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            className={css.input}
           />
         </label>
 
-        <button type="submit" className={css.btn}>
+        <Button type="submit" variant="contained">
           Add contact
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -1,20 +1,25 @@
-import { ContactForm } from '../components/ContactForm/ContactForm';
-import { Filter } from '../components/Filter/Filter';
-import { ContactList } from '../components/ContactList/ContactList';
-import css from './Phonebook.module.css';
+import { ContactForm } from '../components/ContactForm';
+import { Filter } from '../components/Filter';
+import { ContactList } from '../components/ContactList';
 import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { useSelector } from 'react-redux';
+
+const styles = {
+  phonebookContainer: ['pt-10'].join(' '),
+  phonebook: ['text-5xl', 'pb-14', 'text-center'].join(' '),
+  contacts: ['text-3xl', 'pb-4', 'pt-10', 'text-center'].join(' '),
+};
 
 export const Phonebook = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   return (
-    <div className={css.container}>
-      <h1>Phonebook</h1>
-      <ContactForm />
+    <div className={styles.phonebookContainer}>
+      <h1 className={styles.phonebook}>Phonebook App</h1>
+      {/* <ContactForm /> */}
 
-      <h2 className={css.title}>Contacts</h2>
+      {/* <h2 className={styles.contacts}>Contacts</h2> */}
       <Filter />
       {isLoading ? <p>Loading contacts...</p> : <ContactList />}
       {error && <p>Data loading error</p>}

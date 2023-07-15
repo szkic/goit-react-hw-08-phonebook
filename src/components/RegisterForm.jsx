@@ -1,7 +1,12 @@
 import { Button, TextField } from '@mui/material';
-import css from './RegisterForm.module.css';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
+
+const styles = {
+  containerDiv: ['flex', 'justify-center', 'pt-32'].join(' '),
+  registerForm: ['flex', 'flex-col'].join(' '),
+  label: 'mb-5',
+};
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -19,9 +24,9 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className={css.registerContainer}>
-      <form className={css.registerForm} onSubmit={handleSubmit}>
-        <label className={css.label}>
+    <div className={styles.containerDiv}>
+      <form className={styles.registerForm} onSubmit={handleSubmit}>
+        <label className={styles.label}>
           <TextField
             id="register-username-input"
             label="Username"
@@ -30,7 +35,7 @@ export const RegisterForm = () => {
             name="username"
           />
         </label>
-        <label className={css.label}>
+        <label className={styles.label}>
           <TextField
             id="register-email-input"
             label="Email"
@@ -39,7 +44,7 @@ export const RegisterForm = () => {
             name="email"
           />
         </label>
-        <label className={css.label}>
+        <label className={styles.label}>
           <TextField
             id="register-password-input"
             label="Password"
@@ -48,7 +53,7 @@ export const RegisterForm = () => {
             name="password"
           />
         </label>
-        <Button type="submit" variant="contained" className={css.button}>
+        <Button type="submit" variant="contained">
           Register
         </Button>
       </form>
