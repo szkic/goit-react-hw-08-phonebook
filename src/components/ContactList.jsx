@@ -95,7 +95,7 @@ export const ContactList = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 900 }} key="name">
+            <TableCell sx={{ fontWeight: 900, width: '350px' }} key="name">
               <TableSortLabel
                 active={valueToOrderedBy === 'name'}
                 direction={'name' ? orderDirection : 'asc'}
