@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { selectVisibleContacts } from 'redux/contacts/selectors';
-import { deleteContact } from 'redux/contacts/operations';
+import { deleteContact, editContact } from 'redux/contacts/operations';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { red } from '@mui/material/colors';
-
 import {
   Table,
   TableHead,
@@ -16,6 +16,8 @@ import {
   TablePagination,
 } from '@mui/material';
 import { useState } from 'react';
+import { ContactModal } from './ContactModal';
+import { ContactForm } from './ContactForm';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -43,12 +45,13 @@ const sortedRowInformation = (rowArray, comparator) => {
 
 export const ContactList = () => {
   const [orderDirection, setOrderDirection] = useState('asc');
+  const [contactId, setContactId] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const valueToOrderedBy = 'name';
-
+  const [open, setOpen] = useState(false);
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
+  const valueToOrderedBy = 'name';
 
   const handleRequestSort = () => {
     const isAscending = orderDirection === 'asc';
@@ -63,6 +66,30 @@ export const ContactList = () => {
     setRowsPerPage(parseInt(event.target.value), 10);
     setPage(0);
   };
+
+  const handleModalOpen = e => {
+    setContactId(e.currentTarget.id);
+    setOpen(true);
+  };
+  const handleModalClose = () => setOpen(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+
+    const contactData = {
+      name,
+      number,
+      contactId,
+    };
+
+    dispatch(editContact(contactData));
+
+    form.reset();
+  };
+
   return (
     <>
       <Table>
@@ -96,6 +123,15 @@ export const ContactList = () => {
                 <TableCell>{contact.name}</TableCell>
                 <TableCell>{contact.number}</TableCell>
                 <TableCell align="right">
+                  <Tooltip title="Edit">
+                    <IconButton
+                      aria-label="edit"
+                      id={contact.id}
+                      onClick={handleModalOpen}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
                   <Tooltip title="Delete">
                     <IconButton
                       aria-label="delete"
@@ -119,6 +155,9 @@ export const ContactList = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handeChangeRowsPerPage}
       />
+      <ContactModal open={open} handleModalClose={handleModalClose}>
+        <ContactForm onSubmit={handleSubmit} />
+      </ContactModal>
     </>
   );
 };

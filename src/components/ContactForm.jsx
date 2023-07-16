@@ -1,6 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contacts/selectors';
-import { addContact } from 'redux/contacts/operations';
 import { Button, TextField } from '@mui/material';
 
 const styles = {
@@ -8,34 +5,10 @@ const styles = {
   label: ['flex', 'flex-col', 'mb-5', 'w-60'].join(' '),
 };
 
-export const ContactForm = props => {
-  const dispatch = useDispatch();
-
-  const stateContacts = useSelector(selectContacts);
-  const stateContactsNames = stateContacts.map(contact => contact.name);
-
-  const { onSubmit } = props;
-
+export const ContactForm = ({ onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-
-    const contact = {
-      name,
-      number,
-    };
-
-    if (stateContactsNames.includes(name)) {
-      form.reset();
-      return alert(`${name} is alredy in contacts`);
-    }
-
-    dispatch(addContact(contact));
-    onSubmit(false);
-
-    form.reset();
+    onSubmit(e);
   };
 
   return (
