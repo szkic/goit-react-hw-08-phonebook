@@ -5,14 +5,16 @@ import { Button, TextField } from '@mui/material';
 
 const styles = {
   form: ['flex', 'flex-col', 'items-start', 'max-w-sm'].join(' '),
-  label: ['flex', 'flex-col', 'mb-5'].join(' '),
+  label: ['flex', 'flex-col', 'mb-5', 'w-60'].join(' '),
 };
 
-export const ContactForm = () => {
+export const ContactForm = props => {
   const dispatch = useDispatch();
 
   const stateContacts = useSelector(selectContacts);
   const stateContactsNames = stateContacts.map(contact => contact.name);
+
+  const { onSubmit } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,30 +33,31 @@ export const ContactForm = () => {
     }
 
     dispatch(addContact(contact));
+    onSubmit(false);
 
     form.reset();
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>
-          Name
           <TextField
             type="text"
             size="small"
             name="name"
+            label="Name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
         </label>
 
         <label className={styles.label}>
-          Number
           <TextField
             type="tel"
             size="small"
             name="number"
+            label="Number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />

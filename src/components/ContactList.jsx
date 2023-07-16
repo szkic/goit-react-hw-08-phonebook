@@ -55,9 +55,7 @@ export const ContactList = () => {
     setOrderDirection(isAscending ? 'desc' : 'asc');
   };
 
-  const createSortHandler = () => event => {
-    handleRequestSort();
-  };
+  const createSortHandler = () => event => handleRequestSort();
 
   const handleChangePage = (event, newPage) => setPage(newPage);
 
@@ -74,7 +72,7 @@ export const ContactList = () => {
               <TableSortLabel
                 active={valueToOrderedBy === 'name'}
                 direction={'name' ? orderDirection : 'asc'}
-                onClick={createSortHandler('name')}
+                onClick={createSortHandler()}
               >
                 Name
               </TableSortLabel>
@@ -110,23 +108,6 @@ export const ContactList = () => {
                 </TableCell>
               </TableRow>
             ))}
-          {/* {contacts.map(contact => (
-            <TableRow key={contact.id}>
-              <TableCell>{contact.name}</TableCell>
-              <TableCell>{contact.number}</TableCell>
-              <TableCell align="right">
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="delete"
-                    sx={{ color: red[500] }}
-                    onClick={() => dispatch(deleteContact(contact.id))}
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
-                </Tooltip>
-              </TableCell>
-            </TableRow> 
-          ))} */}
         </TableBody>
       </Table>
       <TablePagination

@@ -25,7 +25,6 @@ export const LoginForm = () => {
     <div className={styles.containerDiv}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <label className={styles.label}>
-          {/* Email */}
           <TextField
             id="login-email-input"
             label="Email"
@@ -35,7 +34,6 @@ export const LoginForm = () => {
           />
         </label>
         <label className={styles.label}>
-          {/* Password */}
           <TextField
             id="login-password-input"
             label="Password"

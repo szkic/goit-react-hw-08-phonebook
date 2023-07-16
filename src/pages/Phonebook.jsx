@@ -15,10 +15,8 @@ export const Phonebook = () => {
 
   return (
     <div className={styles.phonebookContainer}>
-      <h1 className={styles.phonebook}>Phonebook App</h1>
-      {/* <ContactForm /> */}
+      <h1 className={styles.phonebook}>Phonebook</h1>
 
-      {/* <h2 className={styles.contacts}>Contacts</h2> */}
       <Filter />
       {isLoading ? <p>Loading contacts...</p> : <ContactList />}
       {error && <p>Data loading error</p>}

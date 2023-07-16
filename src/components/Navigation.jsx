@@ -7,13 +7,33 @@ export const Navigation = () => {
 
   return (
     <div>
-      <NavLink to="/">
-        <Button>Home</Button>
-      </NavLink>
+      <Button
+        to="/"
+        component={NavLink}
+        sx={{
+          '&.active': {
+            color: '#00B4E5',
+            fontWeight: 600,
+            textDecoration: 'underline',
+          },
+        }}
+      >
+        Home
+      </Button>
       {isLoggedIn && (
-        <NavLink to="/contacts">
-          <Button>Contacts</Button>
-        </NavLink>
+        <Button
+          to="/contacts"
+          component={NavLink}
+          sx={{
+            '&.active': {
+              color: '#00B4E5',
+              fontWeight: 600,
+              textDecoration: 'underline',
+            },
+          }}
+        >
+          Contacts
+        </Button>
       )}
     </div>
   );

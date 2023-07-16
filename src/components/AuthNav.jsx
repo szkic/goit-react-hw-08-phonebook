@@ -4,12 +4,32 @@ import { Button } from '@mui/material';
 export const AuthNav = () => {
   return (
     <div>
-      <NavLink to="/register" className="p-4">
-        <Button>Register</Button>
-      </NavLink>
-      <NavLink to="/login" className="p-4">
-        <Button>Login</Button>
-      </NavLink>
+      <Button
+        to="/register"
+        component={NavLink}
+        sx={{
+          '&.active': {
+            color: '#00B4E5',
+            fontWeight: 600,
+            textDecoration: 'underline',
+          },
+        }}
+      >
+        Register
+      </Button>
+      <Button
+        to="/login"
+        component={NavLink}
+        sx={{
+          '&.active': {
+            color: '#00B4E5',
+            fontWeight: 600,
+            textDecoration: 'underline',
+          },
+        }}
+      >
+        Login
+      </Button>
     </div>
   );
 };

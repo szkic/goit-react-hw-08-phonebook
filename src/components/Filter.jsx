@@ -24,34 +24,34 @@ const styles = {
     'left-1/2',
     '-translate-x-1/2',
     '-translate-y-1/2',
-    'w-96',
-    'border-2',
-    'border-solid',
-    'border-black',
+    'rounded-xl',
     'bg-slate-50',
-    'p-4',
+    'p-9',
     'shadow-lg',
   ].join(' '),
 };
 
 export const Filter = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleInputChange = e => dispatch(filterContact(e.target.value));
 
-  // żeby zamknąć modala, muszę przekazać propsy do ContactForm - setOpen(false)
   return (
     <div className={styles.container}>
-      {/* <h3>Find contact by name</h3> */}
       <TextField
         size="small"
         label="Find contact by name"
         onChange={handleInputChange}
       />
-      <Button onClick={handleOpen}>Add contact</Button>
+      <Button onClick={handleOpen} variant="outlined">
+        Add contact
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -59,7 +59,7 @@ export const Filter = () => {
         aria-describedby="modal-modal-description"
       >
         <Box className={styles.modal}>
-          <ContactForm />
+          <ContactForm onSubmit={() => setOpen(false)} />
         </Box>
       </Modal>
     </div>
