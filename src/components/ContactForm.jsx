@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 
 const styles = {
+  container: ['flex', 'justify-center'].join(' '),
   form: ['flex', 'flex-col', 'items-start', 'max-w-sm'].join(' '),
   label: ['flex', 'flex-col', 'mb-5', 'w-60'].join(' '),
 };
@@ -12,7 +13,7 @@ export const ContactForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>
           <TextField
@@ -36,8 +37,8 @@ export const ContactForm = ({ onSubmit }) => {
           />
         </label>
 
-        <Button type="submit" variant="contained">
-          Accept
+        <Button type="submit" variant="contained" style={{ margin: '0 auto' }}>
+          Save
         </Button>
       </form>
     </div>

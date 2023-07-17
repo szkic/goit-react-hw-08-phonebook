@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectVisibleContacts } from 'redux/contacts/selectors';
 import { deleteContact, editContact } from 'redux/contacts/operations';
@@ -14,8 +15,13 @@ import {
   Tooltip,
   TableSortLabel,
   TablePagination,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from '@mui/material';
-import { useState } from 'react';
 import { ContactModal } from './ContactModal';
 import { ContactForm } from './ContactForm';
 
@@ -49,9 +55,19 @@ export const ContactList = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
   const valueToOrderedBy = 'name';
+
+  const handleOpenDelete = e => {
+    setContactId(e.currentTarget.id);
+    setOpenDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
 
   const handleRequestSort = () => {
     const isAscending = orderDirection === 'asc';
@@ -132,15 +148,23 @@ export const ContactList = () => {
                       <EditIcon />
                     </IconButton>
                   </Tooltip>
+                  {
+                    // ------------- *********** --------------
+                  }
                   <Tooltip title="Delete">
                     <IconButton
                       aria-label="delete"
                       sx={{ color: red[500] }}
-                      onClick={() => dispatch(deleteContact(contact.id))}
+                      id={contact.id}
+                      // onClick={() => dispatch(deleteContact(contact.id))}
+                      onClick={handleOpenDelete}
                     >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
+                  {
+                    // ------------- *********** --------------
+                  }
                 </TableCell>
               </TableRow>
             ))}
@@ -158,6 +182,32 @@ export const ContactList = () => {
       <ContactModal open={open} handleModalClose={handleModalClose}>
         <ContactForm onSubmit={handleSubmit} />
       </ContactModal>
+
+      <Dialog
+        open={openDelete}
+        onClose={handleCloseDelete}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Delete Contact</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete contact?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDelete}>No</Button>
+          <Button
+            onClick={
+              (handleCloseDelete, () => dispatch(deleteContact(contactId)))
+            }
+            autoFocus
+            variant="contained"
+          >
+            Yes, I'm sure
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
