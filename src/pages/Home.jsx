@@ -7,6 +7,8 @@ const styles = [
   'text-4xl',
 ].join(' ');
 
-export const Home = () => {
+const Home = () => {
   return <h1 className={styles}>📖 Welcome to phonebook 📱</h1>;
 };
+
+export default Home;

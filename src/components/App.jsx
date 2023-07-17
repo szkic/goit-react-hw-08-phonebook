@@ -1,19 +1,17 @@
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-import { Home } from 'pages/Home';
-import { Login } from 'pages/Login';
-import { Register } from 'pages/Register';
 import { RestrictedRoute } from './RestrictedRoute';
-import { Phonebook } from 'pages/Phonebook';
 import { PrivateRoute } from './PrivateRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { fetchContacts } from 'redux/contacts/operations';
 import { useAuth } from 'hooks/useAuth';
 
-// const HomePage = lazy(() => import('../pages/Home'));
-// const RegisterPage = lazy(() => import('../pages/Register'));
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const PhonebookPage = lazy(() => import('../pages/Phonebook'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,26 +27,32 @@ export const App = () => {
       <div className="w-4/6">
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<HomePage />} />
             <Route
               path="/register"
               element={
                 <RestrictedRoute
                   redirectTo="/contacts"
-                  component={<Register />}
+                  component={<RegisterPage />}
                 />
               }
             />
             <Route
               path="/login"
               element={
-                <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<LoginPage />}
+                />
               }
             />
             <Route
               path="/contacts"
               element={
-                <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<PhonebookPage />}
+                />
               }
             />
           </Route>

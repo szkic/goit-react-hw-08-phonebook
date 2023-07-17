@@ -37,7 +37,7 @@ export const ContactForm = ({ onSubmit }) => {
         </label>
 
         <Button type="submit" variant="contained">
-          Add contact
+          Accept
         </Button>
       </form>
     </div>

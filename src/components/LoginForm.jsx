@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/operations';
 
 const styles = {
-  containerDiv: ['flex', 'justify-center', 'pt-32'].join(' '),
-  loginForm: ['flex', 'flex-col'].join(' '),
+  containerDiv: ['flex', 'justify-center', 'mt-28'].join(' '),
+  loginForm: ['flex', 'flex-col', 'border-2', 'p-14', 'rounded-3xl'].join(' '),
   label: 'mb-5',
 };
 

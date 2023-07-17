@@ -9,7 +9,7 @@ const styles = {
   contacts: ['text-3xl', 'pb-4', 'pt-10', 'text-center'].join(' '),
 };
 
-export const Phonebook = () => {
+const Phonebook = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -23,3 +23,5 @@ export const Phonebook = () => {
     </div>
   );
 };
+
+export default Phonebook;
