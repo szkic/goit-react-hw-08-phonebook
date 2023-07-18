@@ -1,14 +1,14 @@
 import { LoginForm } from 'components/LoginForm';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Login = () => {
   return (
-    <div>
+    <HelmetProvider>
       <Helmet>
         <title>Login</title>
       </Helmet>
       <LoginForm />
-    </div>
+    </HelmetProvider>
   );
 };
 

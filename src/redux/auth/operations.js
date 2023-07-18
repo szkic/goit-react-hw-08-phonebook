@@ -5,13 +5,9 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-
-  //wersja z dokumentacji axios - sprawdzić później czy też działa
-  // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 };
 
 const clearAuthHeader = () => {
-  // sprawdzić czy można to zrobić w jednej linijce
   axios.defaults.headers.common.Authorization = '';
 };
 

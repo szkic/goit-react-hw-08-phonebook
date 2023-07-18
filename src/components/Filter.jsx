@@ -1,16 +1,12 @@
 import { TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterContact } from 'redux/contacts/filtersSlice';
-
-// import Box from '@mui/material/Box';
-// import Modal from '@mui/material/Modal';
-import { ContactForm } from './ContactForm';
-import Button from '@mui/material/Button';
 import { useState } from 'react';
-import { ContactModal } from './ContactModal';
-
+import Button from '@mui/material/Button';
 import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
+import { ContactForm } from './ContactForm';
+import { ContactModal } from './ContactModal';
 
 const styles = [
   'flex',
@@ -66,19 +62,13 @@ export const Filter = () => {
       <Button onClick={handleModalOpen} variant="outlined">
         Add contact
       </Button>
-      <ContactModal open={open} handleModalClose={handleModalClose}>
+      <ContactModal
+        open={open}
+        handleModalClose={handleModalClose}
+        title="Add contact"
+      >
         <ContactForm onSubmit={handleSubmit} />
       </ContactModal>
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className={styles.modal}>
-          <ContactForm onSubmit={() => setOpen(false)} />
-        </Box>
-      </Modal> */}
     </div>
   );
 };

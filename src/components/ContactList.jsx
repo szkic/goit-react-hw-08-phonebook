@@ -148,23 +148,16 @@ export const ContactList = () => {
                       <EditIcon />
                     </IconButton>
                   </Tooltip>
-                  {
-                    // ------------- *********** --------------
-                  }
                   <Tooltip title="Delete">
                     <IconButton
                       aria-label="delete"
                       sx={{ color: red[500] }}
                       id={contact.id}
-                      // onClick={() => dispatch(deleteContact(contact.id))}
                       onClick={handleOpenDelete}
                     >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-                  {
-                    // ------------- *********** --------------
-                  }
                 </TableCell>
               </TableRow>
             ))}
@@ -179,7 +172,11 @@ export const ContactList = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handeChangeRowsPerPage}
       />
-      <ContactModal open={open} handleModalClose={handleModalClose}>
+      <ContactModal
+        open={open}
+        handleModalClose={handleModalClose}
+        title="Edit contact"
+      >
         <ContactForm onSubmit={handleSubmit} />
       </ContactModal>
 

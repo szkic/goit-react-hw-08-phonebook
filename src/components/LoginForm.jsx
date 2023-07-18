@@ -4,7 +4,14 @@ import { login } from 'redux/auth/operations';
 
 const styles = {
   containerDiv: ['flex', 'justify-center', 'mt-28'].join(' '),
-  loginForm: ['flex', 'flex-col', 'border-2', 'p-14', 'rounded-3xl'].join(' '),
+  loginForm: [
+    'flex',
+    'flex-col',
+    'border-2',
+    'p-14',
+    'rounded-3xl',
+    'shadow-lg',
+  ].join(' '),
   label: 'mb-5',
 };
 

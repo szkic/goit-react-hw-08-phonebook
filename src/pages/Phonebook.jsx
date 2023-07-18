@@ -2,10 +2,11 @@ import { Filter } from '../components/Filter';
 import { ContactList } from '../components/ContactList';
 import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { useSelector } from 'react-redux';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const styles = {
   phonebookContainer: ['pt-10'].join(' '),
-  phonebook: ['text-5xl', 'pb-14', 'text-center'].join(' '),
+  phonebook: ['text-5xl', 'pb-14', 'text-center', 'uppercase'].join(' '),
   contacts: ['text-3xl', 'pb-4', 'pt-10', 'text-center'].join(' '),
 };
 
@@ -15,6 +16,12 @@ const Phonebook = () => {
 
   return (
     <div className={styles.phonebookContainer}>
+      <HelmetProvider>
+        <Helmet>
+          <title>Phonebook</title>
+        </Helmet>
+      </HelmetProvider>
+
       <h1 className={styles.phonebook}>Phonebook</h1>
 
       <Filter />

@@ -4,9 +4,14 @@ import { register } from 'redux/auth/operations';
 
 const styles = {
   containerDiv: ['flex', 'justify-center', 'pt-32'].join(' '),
-  registerForm: ['flex', 'flex-col', 'border-2', 'p-14', 'rounded-3xl'].join(
-    ' '
-  ),
+  registerForm: [
+    'flex',
+    'flex-col',
+    'border-2',
+    'p-14',
+    'rounded-3xl',
+    'shadow-lg',
+  ].join(' '),
   label: 'mb-5',
 };
 
