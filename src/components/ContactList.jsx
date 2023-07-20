@@ -143,6 +143,11 @@ export const ContactList = () => {
                     <IconButton
                       aria-label="edit"
                       id={contact.id}
+                      sx={{
+                        ':hover': {
+                          color: '#1876D1',
+                        },
+                      }}
                       onClick={handleModalOpen}
                     >
                       <EditIcon />
@@ -151,7 +156,12 @@ export const ContactList = () => {
                   <Tooltip title="Delete">
                     <IconButton
                       aria-label="delete"
-                      sx={{ color: red[500] }}
+                      sx={{
+                        color: red[500],
+                        ':hover': {
+                          color: '#e30022',
+                        },
+                      }}
                       id={contact.id}
                       onClick={handleOpenDelete}
                     >

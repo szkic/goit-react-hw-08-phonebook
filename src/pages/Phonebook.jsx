@@ -22,7 +22,7 @@ const Phonebook = () => {
         </Helmet>
       </HelmetProvider>
 
-      <h1 className={styles.phonebook}>Phonebook</h1>
+      <h2 className={styles.phonebook}>Phonebook</h2>
 
       <Filter />
       {isLoading ? <p>Loading contacts...</p> : <ContactList />}
