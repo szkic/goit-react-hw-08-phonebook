@@ -1,6 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const styles = {
   containerDiv: ['flex', 'justify-center', 'pt-32'].join(' '),
@@ -26,6 +28,19 @@ export const RegisterForm = () => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
+
+    if (registerElements.name.length < 2) {
+      return toast.error('Username must consist of 2 characters', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
 
     dispatch(register(registerElements));
   };
@@ -64,6 +79,18 @@ export const RegisterForm = () => {
           Register
         </Button>
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };
