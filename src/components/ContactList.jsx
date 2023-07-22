@@ -24,6 +24,8 @@ import {
 } from '@mui/material';
 import { ContactModal } from './ContactModal';
 import { ContactForm } from './ContactForm';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -89,6 +91,20 @@ export const ContactList = () => {
   };
   const handleModalClose = () => setOpen(false);
 
+  const handleDeleteContact = () => {
+    dispatch(deleteContact(contactId));
+    toast.success('Contact deleted', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -101,7 +117,47 @@ export const ContactList = () => {
       contactId,
     };
 
+    const regexName =
+      /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+    if (!regexName.test(name)) {
+      return toast.error('Please enter right name', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+
+    const regexPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
+    if (!regexPhone.test(number)) {
+      return toast.error('Please enter the correct number xxx-xxx-xxx', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+
     dispatch(editContact(contactData));
+
+    toast.info('Contact changed', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
 
     form.reset();
   };
@@ -205,9 +261,7 @@ export const ContactList = () => {
         <DialogActions>
           <Button onClick={handleCloseDelete}>No</Button>
           <Button
-            onClick={
-              (handleCloseDelete, () => dispatch(deleteContact(contactId)))
-            }
+            onClick={(handleCloseDelete, handleDeleteContact)}
             autoFocus
             variant="contained"
           >
@@ -215,6 +269,18 @@ export const ContactList = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };
